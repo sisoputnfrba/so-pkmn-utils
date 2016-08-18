@@ -4,13 +4,13 @@ CC=gcc
 C_SRCS=$(shell find . -iname "*.c" | tr '\n' ' ')
 OBJS=$(C_SRCS:./%.c=build/%.o)
 
-all: build/so-pkmn-battle-comparator-test
+all: build/so-pkmn-battle-test
 
 create-dirs:
 	mkdir -p build/.
 
-build/so-pkmn-battle-comparator-test: dependents create-dirs $(OBJS)
-	$(CC) -Wall -L"../src/build" -o "build/so-pkmn-battle-comparator-test" $(OBJS) -lpkmn-battle-comp -lcommons
+build/so-pkmn-battle-test: dependents create-dirs $(OBJS)
+	$(CC) -Wall -L"../src/build" -o "build/so-pkmn-battle-test" $(OBJS) -lpkmn-battle -lcommons
 
 build/%.o: ./%.c
 	$(CC) -I"../src" -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"

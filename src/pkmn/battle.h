@@ -14,16 +14,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COMPARATOR_H_
-#define COMPARATOR_H_
+#ifndef BATTLE_H_
+#define BATTLE_H_
 
   #include <stdio.h>
   #include <stdlib.h>
+  #include <stdbool.h>
   #include <stdint.h>
 
   //Tipos de datos
-  typedef u_int8_t t_nivel;
-  typedef u_int32_t t_result_compare;
+  typedef int t_level;
 
   typedef enum {
     NORMAL    = 0,
@@ -47,23 +47,25 @@
   } t_pokemon_type;
 
   typedef struct {
-    char * especie;
-    char simbolo;
-    t_pokemon_type tipo;
-    t_pokemon_type tipo_alterno;
-    t_nivel nivel;
+    char* especies;
+    char symbol;
+    t_pokemon_type type;
+    bool is_dual_type;
+    t_pokemon_type second_type;
+    t_level level;
   } t_pokemon;
 
  /*
   * Comparar Pokémons
   *
   * Realiza la comparación entre 2 pokémons según sus tipos y niveles
-  * El valor de retorno será 1 si la el primer pokémon tiene mayor peso.
-  * En caso contrario, retorna 0. Finalmente, ante un empate
+  * El valor de retorno será el pokemon que más peso tenga en la comparación.
+  * En caso de empate, ganará el que mayor nivel tenga
+  * o el primero en caso del empate de nivel.
   *
   * @params 2 pokémons que tengan al menos nivel y tipo
-  * @return  Valor resultado de la comparación: 1, 0 o -1
+  * @return  El t_pokemon victorioso
   */
-  t_result_compare so_compare_pokemon(t_pokemon* first_pokemon, t_pokemon* second_pokemon);
+  t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon);
 
 #endif

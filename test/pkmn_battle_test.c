@@ -15,13 +15,22 @@
  */
 
 #include <stdio.h>
-#include <pkmn/comparator.h>
+#include <stdbool.h>
+#include <pkmn/battle.h>
 
 
 int main(int argc, char **argv) {
-  t_pokemon * variable = malloc(sizeof(t_pokemon));
-  variable->tipo = WATER;
-  printf("Tipo: %d\n", variable->tipo);
-  free(variable);
+  t_pokemon * pikachu = malloc(sizeof(t_pokemon));
+  pikachu->type = ELECTRIC;
+  pikachu->is_dual_type = false;
+  pikachu->level = 25;
+  t_pokemon * groundon = malloc(sizeof(t_pokemon));
+  groundon->type = GROUND;
+  groundon->second_type = FIRE;
+  groundon->is_dual_type = true;
+  groundon->level = 24;
+  printf("Tipo: %d\n", pkmn_battle(pikachu, groundon)->type);
+  free(pikachu);
+  free(groundon);
   return 0;
 }

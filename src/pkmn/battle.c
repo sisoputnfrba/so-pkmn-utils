@@ -1,4 +1,20 @@
-#include "comparator.h"
+/*
+ * Copyright (C) 2016 Sistemas Operativos - UTN FRBA. All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "battle.h"
 
 typedef enum {
   NORMAL_DAMAGE = 0,
@@ -9,15 +25,38 @@ typedef enum {
 
 t_type_chart_damage type_chart[18][18];
 
-t_result_compare so_compare_pokemon(t_pokemon* first_pokemon, t_pokemon* second_pokemon) {
-  t_nivel first_lvl = first_pokemon->nivel;
-  t_nivel second_lvl = second_pokemon->nivel;
+int extra_damage(t_pokemon* attacker, t_pokemon* defender);
 
-  // TODO: Comparate nivel * attack_type <> nivel * defense_type
+t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon) {
+  int result = 
+      first_pokemon->level + extra_damage(first_pokemon, second_pokemon) 
+    - second_pokemon->level + extra_damage(second_pokemon, first_pokemon);
 
-  return 0;
+  //if equals
+  if(!result) 
+    if(first_pokemon->level >= second_pokemon->level)
+        return first_pokemon;
+    else
+        return second_pokemon;
+  if(result > 0) 
+    return first_pokemon;
+  else
+    return second_pokemon;
+  return NULL;
 }
 
+int extra_damage(t_pokemon* attacker, t_pokemon* defender) {
+    t_type_chart_damage damage, alt_damage = NORMAL_DAMAGE;
+
+    damage = type_chart[attacker->type][defender->type];
+    if(defender->is_dual_type)
+        alt_damage = type_chart[attacker->type][defender->second_type];
+    if(damage == NO_DAMAGE || alt_damage == NO_DAMAGE)
+        return NO_DAMAGE;
+    return damage + alt_damage;
+}
+
+//[Attack_Type][Landing Type]
 t_type_chart_damage type_chart[18][18] = {
   { //Normal Attack
     NORMAL_DAMAGE, //Normal

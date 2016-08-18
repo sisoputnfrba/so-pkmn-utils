@@ -31,3 +31,7 @@
 # Debug files
 *.dSYM/
 *.su
+
+# Build metadata
+src/build/*
+test/build/*

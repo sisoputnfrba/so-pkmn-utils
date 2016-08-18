@@ -6,13 +6,13 @@ H_SRCS=$(shell find . -iname "*.h" | tr '\n' ' ')
 OBJS=$(C_SRCS:./%.c=build/%.o)
 
 # Clean and compile .so
-all: build/libpkmn-battle-comp.so
+all: build/libpkmn-battle.so
 
 create-dirs:
 	mkdir -p build/pkmn
 
-build/libpkmn-battle-comp.so: create-dirs $(OBJS)
-	$(CC) -shared -Wall -o "build/libpkmn-battle-comp.so" $(OBJS)
+build/libpkmn-battle.so: create-dirs $(OBJS)
+	$(CC) -shared -Wall -o "build/libpkmn-battle.so" $(OBJS)
 
 build/pkmn/%.o: pkmn/%.c
 	$(CC) -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
@@ -26,11 +26,11 @@ clean:
 	$(RM) build
 
 install: all
-	cp -u build/libpkmn-battle-comp.so /usr/lib
+	cp -u build/libpkmn-battle.so /usr/lib
 	cp --parents -u $(H_SRCS) /usr/include
 
 uninstall:
-	rm -f /usr/lib/libpkmn-battle-comp.so
+	rm -f /usr/lib/libpkmn-battle.so
 	rm -rf /usr/include/pkmn-comparator
 
 .PHONY: all create-dirs clean install uninstall
