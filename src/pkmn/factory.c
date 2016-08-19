@@ -13,3 +13,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include "factory.h"
+
+t_pokemon* create_pkmn_from_string(char* species, t_level level) {
+  printf("I'm a mock function!");
+  return NULL;
+}

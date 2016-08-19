@@ -23,27 +23,44 @@ typedef enum {
   NO_DAMAGE     = -20
 } t_type_chart_damage;
 
+typedef enum {
+  DRAW          = 0,
+  FIRST_PKMN    = 1,
+  SECOND_PKMN   = -1,
+} t_result_pkmn_battle;
+
 t_type_chart_damage type_chart[18][18];
 
 int extra_damage(t_pokemon* attacker, t_pokemon* defender);
+int signum(int number);
+
 
 t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon) {
-  int result = 
+  t_pokemon* winner;
+
+  t_result_pkmn_battle result = 
       first_pokemon->level + extra_damage(first_pokemon, second_pokemon) 
     - second_pokemon->level + extra_damage(second_pokemon, first_pokemon);
 
-  //if equals
-  if(!result) 
-    if(first_pokemon->level >= second_pokemon->level)
-        return first_pokemon;
-    else
-        return second_pokemon;
-  if(result > 0) 
-    return first_pokemon;
-  else
-    return second_pokemon;
-  return NULL;
+  switch(signum(result)) {
+
+    case DRAW:
+      if(first_pokemon->level >= second_pokemon->level)
+          winner = first_pokemon;
+      else
+          winner = second_pokemon;
+      break;
+    case FIRST_PKMN:
+      winner = first_pokemon;
+      break;
+    case SECOND_PKMN:
+      winner = second_pokemon;
+      break;
+  }
+  return winner;
 }
+
+//Private functions
 
 int extra_damage(t_pokemon* attacker, t_pokemon* defender) {
     t_type_chart_damage damage, alt_damage = NORMAL_DAMAGE;
@@ -54,6 +71,12 @@ int extra_damage(t_pokemon* attacker, t_pokemon* defender) {
     if(damage == NO_DAMAGE || alt_damage == NO_DAMAGE)
         return NO_DAMAGE;
     return damage + alt_damage;
+}
+
+int signum(int number) {
+  if (number > 0) return 1;
+  if (number < 0) return -1;
+  return 0;
 }
 
 //[Attack_Type][Landing Type]

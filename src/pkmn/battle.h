@@ -21,42 +21,10 @@
   #include <stdlib.h>
   #include <stdbool.h>
   #include <stdint.h>
-
-  //Tipos de datos
-  typedef int t_level;
-
-  typedef enum {
-    NORMAL    = 0,
-    FIRE      = 1,
-    WATER     = 2,
-    ELECTRIC  = 3,
-    GRASS     = 4,
-    ICE       = 5,
-    FIGHT     = 6,
-    POISON    = 7,
-    GROUND    = 8,
-    FLYING    = 9,
-    PSYCHC    = 10,
-    BUG       = 11,
-    ROCK      = 12,
-    GHOST     = 13,
-    DRAGON    = 14,
-    DARK      = 15,
-    STEEL     = 16,
-    FAIRY     = 17
-  } t_pokemon_type;
-
-  typedef struct {
-    char* especies;
-    char symbol;
-    t_pokemon_type type;
-    bool is_dual_type;
-    t_pokemon_type second_type;
-    t_level level;
-  } t_pokemon;
+  #include "factory.h"
 
  /*
-  * Comparar Pokémons
+  * Batalla Pokémon
   *
   * Realiza la comparación entre 2 pokémons según sus tipos y niveles
   * El valor de retorno será el pokemon que más peso tenga en la comparación.
@@ -64,7 +32,7 @@
   * o el primero en caso del empate de nivel.
   *
   * @params 2 pokémons que tengan al menos nivel y tipo
-  * @return  El t_pokemon victorioso
+  * @return  El t_pokemon* del pokémon victorioso
   */
   t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon);
 
