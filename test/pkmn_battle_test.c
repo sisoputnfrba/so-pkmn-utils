@@ -16,21 +16,29 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <pkmn/factory.h>
 #include <pkmn/battle.h>
 
 
 int main(int argc, char **argv) {
-  t_pokemon * pikachu = malloc(sizeof(t_pokemon));
-  pikachu->type = ELECTRIC;
-  pikachu->is_dual_type = false;
-  pikachu->level = 25;
-  t_pokemon * groundon = malloc(sizeof(t_pokemon));
-  groundon->type = GROUND;
-  groundon->second_type = FIRE;
-  groundon->is_dual_type = true;
-  groundon->level = 24;
-  printf("Tipo: %d\n", pkmn_battle(pikachu, groundon)->type);
+  t_pkmn_factory* pokemon_factory = create_pkmn_factory(); 
+  t_pokemon * pikachu = create_pokemon(pokemon_factory, "Pikachu", 30);
+  t_pokemon * rhyhorn = create_pokemon(pokemon_factory, "Rhyhorn", 6);
+
+  printf("========Battle Royale!========\n");
+  printf("Primer Pokemon: %s[%s/%s] Nivel: %d\n", 
+    pikachu->species, pkmn_type_to_string(pikachu->type), 
+    pkmn_type_to_string(pikachu->second_type), pikachu->level);
+  printf("Segundo Pokemon: %s[%s/%s] Nivel: %d\n",
+    rhyhorn->species, pkmn_type_to_string(rhyhorn->type),
+    pkmn_type_to_string(rhyhorn->second_type), rhyhorn->level);
+
+  t_pokemon * winner = pkmn_battle(pikachu, rhyhorn);
+
+  printf("El Ganador es: %s\n", winner->species);
+
   free(pikachu);
-  free(groundon);
+  free(rhyhorn);
+  destroy_pkmn_factory(pokemon_factory);
   return 0;
 }

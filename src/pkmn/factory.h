@@ -19,51 +19,81 @@
 
   #include <stdio.h>
   #include <stdlib.h>
-  #include <stdbool.h>
   #include <stdint.h>
+  #include <string.h>
+  #include <ctype.h>
+  #include <commons/collections/dictionary.h>
 
   //Tipos de datos
   typedef int t_level;
 
   typedef enum {
-    NORMAL    = 0,
-    FIRE      = 1,
-    WATER     = 2,
-    ELECTRIC  = 3,
-    GRASS     = 4,
-    ICE       = 5,
-    FIGHT     = 6,
-    POISON    = 7,
-    GROUND    = 8,
-    FLYING    = 9,
-    PSYCHC    = 10,
-    BUG       = 11,
-    ROCK      = 12,
-    GHOST     = 13,
-    DRAGON    = 14,
-    DARK      = 15,
-    STEEL     = 16,
-    FAIRY     = 17
+    NO_TYPE   = 0,
+    NORMAL    = 1,
+    FIRE      = 2,
+    WATER     = 3,
+    ELECTRIC  = 4,
+    GRASS     = 5,
+    ICE       = 6,
+    FIGHT     = 7,
+    POISON    = 8,
+    GROUND    = 9,
+    FLYING    = 10,
+    PSYCHC    = 11,
+    BUG       = 12,
+    ROCK      = 13,
+    GHOST     = 14,
+    DRAGON    = 15,
+    DARK      = 16,
+    STEEL     = 17,
+    FAIRY     = 18
   } t_pokemon_type;
 
   typedef struct {
     char* species;
-    char symbol;
     t_pokemon_type type;
-    bool is_dual_type;
     t_pokemon_type second_type;
     t_level level;
   } t_pokemon;
 
+  typedef struct {
+    t_dictionary* pkmn_data;
+  } t_pkmn_factory;
+
  /*
-  * Crear pokemon mediante el nombre y el nivel
+  * Crea una factory que crea pokémons
+  * La fábrica solamente es capaz de crear pokémons de primera generación.
   *
-  * Mediante una cadena que con el nombre del pokemon, 
-  * esta función devuelve un t_pokemon* con toda la información necesaria cargada
-  * El nombre pasado debe encontrarse dentro de los primeros 151 pokémons.
-  * @params el nombre de la especie(ej. "pikachu") y el nivel como número
+  */
+
+  t_pkmn_factory* create_pkmn_factory();
+
+ /*
+  * Destruye una factory de pokémons y libera todos los recursos utilizados
+  *
+  */
+  void destroy_pkmn_factory(t_pkmn_factory* factory);
+
+ /*
+  * Crear pokemon mediante el nombre y el nivel en una fábrica
+  *
+  * Mediante una cadena que con el nombre del pokemon.
+  * El mismo debe comenzar con mayúscula y encontrarse bien escrito. 
+  * Esta función devuelve un t_pokemon* con toda la información necesaria cargada
+  * @params la fábrica desde donde construir, el nombre de la especie(ej. "pikachu") y el nivel como número
   * @return un puntero a un t_pokemon con la información ya cargada.
   */
-  t_pokemon* create_pkmn_from_string(char* species_name, t_level level);
+  t_pokemon* create_pokemon(t_pkmn_factory* factory, char* species, t_level level);
+
+ /*
+  * Pkmn Type a String
+  *
+  * Devuelve el nombre del tipo pasado por parámetro
+  * Tener en cuenta que el valor de retorno deberá ser liberado tras usarse
+  * mediante free()
+  * @params t_pokemon_type
+  * @return string que representa el nombre del tipo
+  */
+  char * pkmn_type_to_string(t_pokemon_type type);
 
 #endif

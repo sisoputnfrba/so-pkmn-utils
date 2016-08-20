@@ -29,7 +29,7 @@ typedef enum {
   SECOND_PKMN   = -1,
 } t_result_pkmn_battle;
 
-t_type_chart_damage type_chart[18][18];
+t_type_chart_damage type_chart[19][19];
 
 int extra_damage(t_pokemon* attacker, t_pokemon* defender);
 int signum(int number);
@@ -39,8 +39,8 @@ t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon) {
   t_pokemon* winner;
 
   t_result_pkmn_battle result = 
-      first_pokemon->level + extra_damage(first_pokemon, second_pokemon) 
-    - second_pokemon->level + extra_damage(second_pokemon, first_pokemon);
+      (first_pokemon->level + extra_damage(first_pokemon, second_pokemon)) 
+    - (second_pokemon->level + extra_damage(second_pokemon, first_pokemon));
 
   switch(signum(result)) {
 
@@ -63,11 +63,11 @@ t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon) {
 //Private functions
 
 int extra_damage(t_pokemon* attacker, t_pokemon* defender) {
-    t_type_chart_damage damage, alt_damage = NORMAL_DAMAGE;
+    t_type_chart_damage damage, alt_damage;
 
     damage = type_chart[attacker->type][defender->type];
-    if(defender->is_dual_type)
-        alt_damage = type_chart[attacker->type][defender->second_type];
+    alt_damage = type_chart[attacker->type][defender->second_type];
+
     if(damage == NO_DAMAGE || alt_damage == NO_DAMAGE)
         return NO_DAMAGE;
     return damage + alt_damage;
@@ -80,8 +80,30 @@ int signum(int number) {
 }
 
 //[Attack_Type][Landing Type]
-t_type_chart_damage type_chart[18][18] = {
+t_type_chart_damage type_chart[19][19] = {
+  { //No Attack
+    NORMAL_DAMAGE, //No Type
+    NORMAL_DAMAGE, //Normal
+    NORMAL_DAMAGE, //Fire
+    NORMAL_DAMAGE, //Water
+    NORMAL_DAMAGE, //Electric
+    NORMAL_DAMAGE, //Grass
+    NORMAL_DAMAGE, //Ice
+    NORMAL_DAMAGE, //Fight
+    NORMAL_DAMAGE, //Poison
+    NORMAL_DAMAGE, //Ground
+    NORMAL_DAMAGE, //Flying
+    NORMAL_DAMAGE, //Psychc
+    NORMAL_DAMAGE, //Bug
+    NORMAL_DAMAGE, //Rock
+    NORMAL_DAMAGE, //Ghost
+    NORMAL_DAMAGE, //Dragon
+    NORMAL_DAMAGE, //Dark
+    NORMAL_DAMAGE, //Steel
+    NORMAL_DAMAGE  //Fairy
+  },
   { //Normal Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     NORMAL_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -102,6 +124,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Fire Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     HALF_DAMAGE,   //Fire
     HALF_DAMAGE,   //Water
@@ -122,6 +145,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Water Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     DOUBLE_DAMAGE, //Fire
     HALF_DAMAGE,   //Water
@@ -142,6 +166,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Electric Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     NORMAL_DAMAGE, //Fire
     DOUBLE_DAMAGE, //Water
@@ -162,6 +187,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Grass Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     HALF_DAMAGE,   //Fire
     DOUBLE_DAMAGE, //Water
@@ -182,6 +208,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Ice Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     HALF_DAMAGE,   //Fire
     HALF_DAMAGE,   //Water
@@ -202,6 +229,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Fight Attack
+    NORMAL_DAMAGE, //No Type
     DOUBLE_DAMAGE, //Normal
     NORMAL_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -222,6 +250,7 @@ t_type_chart_damage type_chart[18][18] = {
     HALF_DAMAGE    //Fairy
   },
   { //Poison Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     NORMAL_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -242,6 +271,7 @@ t_type_chart_damage type_chart[18][18] = {
     DOUBLE_DAMAGE  //Fairy
   },
   { //Ground Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     DOUBLE_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -262,6 +292,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Flying Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     NORMAL_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -282,6 +313,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Psychc Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     NORMAL_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -302,6 +334,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Bug Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     HALF_DAMAGE,   //Fire
     NORMAL_DAMAGE, //Water
@@ -322,6 +355,7 @@ t_type_chart_damage type_chart[18][18] = {
     HALF_DAMAGE    //Fairy
   },
   { //Rock Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     DOUBLE_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -342,6 +376,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Ghost Attack
+    NORMAL_DAMAGE, //No Type
     NO_DAMAGE,     //Normal
     NORMAL_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -362,6 +397,7 @@ t_type_chart_damage type_chart[18][18] = {
     NORMAL_DAMAGE  //Fairy
   },
   { //Dragon Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     NORMAL_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -382,6 +418,7 @@ t_type_chart_damage type_chart[18][18] = {
     NO_DAMAGE      //Fairy
   },
   { //Dark Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     NORMAL_DAMAGE, //Fire
     NORMAL_DAMAGE, //Water
@@ -402,6 +439,7 @@ t_type_chart_damage type_chart[18][18] = {
     HALF_DAMAGE    //Fairy
   },
   { //Steel Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     HALF_DAMAGE,   //Fire
     HALF_DAMAGE,   //Water
@@ -422,6 +460,7 @@ t_type_chart_damage type_chart[18][18] = {
     DOUBLE_DAMAGE  //Fairy
   },
   { //Fairy Attack
+    NORMAL_DAMAGE, //No Type
     NORMAL_DAMAGE, //Normal
     HALF_DAMAGE,   //Fire
     NORMAL_DAMAGE, //Water

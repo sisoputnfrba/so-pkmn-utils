@@ -12,7 +12,7 @@ create-dirs:
 	mkdir -p build/pkmn
 
 build/libpkmn-battle.so: create-dirs $(OBJS)
-	$(CC) -shared -Wall -o "build/libpkmn-battle.so" $(OBJS)
+	$(CC) -shared -Wall -o "build/libpkmn-battle.so" $(OBJS) -lcommons
 
 build/pkmn/%.o: pkmn/%.c
 	$(CC) -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"

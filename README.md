@@ -44,4 +44,10 @@ Por ejemplo:
 4. `./build/so-pkmn-battle-comparator-test`: Ejecutar el programa recien compilado
 
 Se espera el siguiente output por pantalla:
-TBA
+
+```
+========Battle Royale!========
+Primer Pokemon: Pikachu[Electric/] Nivel: 30
+Segundo Pokemon: Rhyhorn[Ground/Rock] Nivel: 6
+El Ganador es: Rhyhorn
+```
