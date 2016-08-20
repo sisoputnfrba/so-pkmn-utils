@@ -190,12 +190,16 @@ void add_pkmn_data( t_dictionary* pkmn_database, char* species,
 }
 
 t_pokemon* create_pokemon(t_pkmn_factory* factory, char* species, t_level level) {
+  t_pokemon* new_pkmn = NULL;
   t_pokemon* pkmn_types = dictionary_get(factory->pkmn_data, species);
-  t_pokemon* new_pkmn = malloc(sizeof(t_pokemon));
-  new_pkmn->species = species;
-  new_pkmn->type = pkmn_types->type;
-  new_pkmn->second_type = pkmn_types->second_type;
-  new_pkmn->level = level;
+
+  if(pkmn_types) {
+    new_pkmn = malloc(sizeof(t_pokemon));
+    new_pkmn->species = species;
+    new_pkmn->type = pkmn_types->type;
+    new_pkmn->second_type = pkmn_types->second_type;
+    new_pkmn->level = level; 
+  }
   return new_pkmn;
 }
 
