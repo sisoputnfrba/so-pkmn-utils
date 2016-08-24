@@ -36,7 +36,7 @@ int signum(int number);
 
 
 t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon) {
-  t_pokemon* winner;
+  t_pokemon* loser;
 
   t_result_pkmn_battle result = 
       (first_pokemon->level + extra_damage(first_pokemon, second_pokemon)) 
@@ -46,18 +46,18 @@ t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon) {
 
     case DRAW:
       if(first_pokemon->level >= second_pokemon->level)
-          winner = first_pokemon;
+          loser = second_pokemon;
       else
-          winner = second_pokemon;
+          loser = first_pokemon;
       break;
     case FIRST_PKMN:
-      winner = first_pokemon;
+      loser = second_pokemon;
       break;
     case SECOND_PKMN:
-      winner = second_pokemon;
+      loser = first_pokemon;
       break;
   }
-  return winner;
+  return loser;
 }
 
 //Private functions

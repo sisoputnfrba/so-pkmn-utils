@@ -26,13 +26,14 @@
  /*
   * Batalla Pokémon
   *
-  * Realiza la comparación entre 2 pokémons según sus tipos y niveles
-  * El valor de retorno será el pokemon que más peso tenga en la comparación.
-  * En caso de empate, ganará el que mayor nivel tenga
-  * o el primero en caso del empate de nivel.
+  * Realiza la simulacion de batallan entre 2 pokémons 
+  * según sus tipos y niveles
+  * El valor de retorno será el pokemon que haya perdido la batalla.
+  * En caso de empate, perderá el que menor nivel tenga
+  * o el segundo en caso del empate de nivel.
   *
   * @params 2 pokémons que tengan al menos nivel y tipo
-  * @return  El t_pokemon* del pokémon victorioso
+  * @return  El t_pokemon* del pokémon perdedor
   */
   t_pokemon* pkmn_battle(t_pokemon* first_pokemon, t_pokemon* second_pokemon);
 

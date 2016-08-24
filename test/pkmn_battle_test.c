@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
   t_pokemon * missigno = create_pokemon(pokemon_factory, "MissingNo", 128);
   printf("El Pokémon MissingNo no existe! El puntero de retorno de la factory fue: %p\n", missigno);
 
-  printf("========Battle Royale!========\n");
+  printf("========Batalla!========\n");
   printf("Primer Pokemon: %s[%s/%s] Nivel: %d\n", 
     pikachu->species, pkmn_type_to_string(pikachu->type), 
     pkmn_type_to_string(pikachu->second_type), pikachu->level);
@@ -45,12 +45,12 @@ int main(int argc, char **argv) {
     pkmn_type_to_string(rhyhorn->second_type), rhyhorn->level); //Función que sirve para ver el Tipo de Enum como un String
 
   //La batalla propiamente dicha
-  t_pokemon * winner = pkmn_battle(pikachu, rhyhorn);
+  t_pokemon * loser = pkmn_battle(pikachu, rhyhorn);
 
-  printf("El Ganador es: %s\n", winner->species);
+  printf("El Perdedor es: %s\n", loser->species);
 
   //Liberemos los recursos
-  //Como el puntero winner apunta a alguno de los otros 2, no se lo libera
+  //Como el puntero loser apunta a alguno de los otros 2, no se lo libera
   free(pikachu);
   free(rhyhorn);
   //Hay que destruir la instancia de la Factory

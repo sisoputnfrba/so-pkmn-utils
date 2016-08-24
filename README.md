@@ -48,8 +48,8 @@ Se espera el siguiente output por pantalla:
 
 ```
 El Pokémon MissingNo no existe! El puntero de retorno de la factory fue: (nil)
-========Battle Royale!========
+========Batalla!========
 Primer Pokemon: Pikachu[Electric/] Nivel: 30
 Segundo Pokemon: Rhyhorn[Ground/Rock] Nivel: 6
-El Ganador es: Rhyhorn
+El Perdedor es: Pikachu
 ```
