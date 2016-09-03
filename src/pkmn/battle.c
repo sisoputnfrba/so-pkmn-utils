@@ -117,10 +117,10 @@ t_type_chart_damage type_chart[19][19] = {
     NORMAL_DAMAGE, //Psychc
     NORMAL_DAMAGE, //Bug
     HALF_DAMAGE,   //Rock
-    NORMAL_DAMAGE, //Ghost
+    NO_DAMAGE,     //Ghost
     NORMAL_DAMAGE, //Dragon
     NORMAL_DAMAGE, //Dark
-    NO_DAMAGE,     //Steel
+    HALF_DAMAGE,   //Steel
     NORMAL_DAMAGE  //Fairy
   },
   { //Fire Attack
@@ -299,17 +299,17 @@ t_type_chart_damage type_chart[19][19] = {
     HALF_DAMAGE,   //Electric
     DOUBLE_DAMAGE, //Grass
     NORMAL_DAMAGE, //Ice
-    NORMAL_DAMAGE, //Fight
+    DOUBLE_DAMAGE, //Fight
     NORMAL_DAMAGE, //Poison
     NORMAL_DAMAGE, //Ground
-    DOUBLE_DAMAGE, //Flying
+    NORMAL_DAMAGE, //Flying
     NORMAL_DAMAGE, //Psychc
     DOUBLE_DAMAGE, //Bug
     HALF_DAMAGE,   //Rock
     NORMAL_DAMAGE, //Ghost
     NORMAL_DAMAGE, //Dragon
     NORMAL_DAMAGE, //Dark
-    NORMAL_DAMAGE, //Steel
+    HALF_DAMAGE, //Steel
     NORMAL_DAMAGE  //Fairy
   },
   { //Psychc Attack
@@ -433,7 +433,7 @@ t_type_chart_damage type_chart[19][19] = {
     NORMAL_DAMAGE, //Bug
     NORMAL_DAMAGE, //Rock
     DOUBLE_DAMAGE, //Ghost
-    DOUBLE_DAMAGE, //Dragon
+    NORMAL_DAMAGE, //Dragon
     HALF_DAMAGE,   //Dark
     NORMAL_DAMAGE, //Steel
     HALF_DAMAGE    //Fairy
